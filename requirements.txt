@@ -1,0 +1,23 @@
+# LLM
+anthropic>=2.9
+
+# MCP (API 1.x: mcp.server.fastmcp.FastMCP — na 2.x o FastMCP foi renomeado)
+mcp[cli]>=1.20,<2
+
+# RAG
+pymupdf>=1.24
+langchain-text-splitters>=0.3
+fastembed>=0.5
+psycopg[binary]>=3.2
+pgvector>=0.3
+numpy
+
+# Backend / Frontend
+fastapi>=0.115
+uvicorn>=0.30
+streamlit>=1.40
+requests
+python-dotenv
+
+# Testes
+pytest
