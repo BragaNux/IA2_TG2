@@ -136,7 +136,13 @@ Os retornos são modelos Pydantic, e o FastMCP os publica como `structuredConten
 ### RF05: aplicação
 
 - **Backend** ([backend/api.py](backend/api.py)): `POST /chat`, `GET /health`, `GET /topics`, `GET /documents`. Mantém um único processo MCP durante toda a vida da API.
-- **Frontend** ([frontend/app.py](frontend/app.py)): chat com *badge* de status, alerta de emergência, fontes numeradas, **trace das chamadas MCP** (tool, argumentos, tempo, resultado) e detalhes dos guardrails (score de cada frase).
+- **Frontend** ([frontend/app.py](frontend/app.py) e [frontend/ui.py](frontend/ui.py)): interface responsiva, do desktop ao celular, com identidade visual de salva-vidas.
+  - Botões de ligação (`tel:`) para 192 e 193 sempre visíveis.
+  - Atalhos para as situações mais comuns.
+  - Selo de status em cada resposta e alerta de emergência.
+  - Fontes em cards numerados, com o trecho original expansível.
+  - Painel "Como esta resposta foi construída": guardrail de entrada, chamadas MCP (argumentos, nº de trechos, tempo) e guardrail de saída (frases sem respaldo e tokens gastos).
+- **Modo demonstração**: `http://localhost:8501/?demo=1` reexibe os cenários gravados em `docs/evidencias/cenarios.json` sem chamar o LLM. É útil na apresentação.
 
 ## Como executar
 
@@ -184,7 +190,9 @@ mcp dev mcp_server/server.py        # MCP Inspector para testar as tools isolada
 | Fora do escopo | "Qual é a capital da França?" | `blocked_input` (camada LLM) |
 | Prescrição | "Qual a dose de dipirona para uma criança de 5 anos?" | `blocked_input` (`prescricao_medica`) |
 
-Os screenshots da interface ficam em `docs/evidencias/`.
+Os screenshots da interface ficam em [docs/evidencias/screenshots/](docs/evidencias/screenshots/): tela inicial no desktop e no celular, consulta válida ao vivo, emergência com fontes e trace das tools MCP, e prompt injection bloqueado.
+
+![Consulta ao vivo](docs/evidencias/screenshots/03_desktop_consulta_valida_ao_vivo.png)
 
 ## Estrutura
 
